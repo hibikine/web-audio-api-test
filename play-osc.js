@@ -4,12 +4,26 @@ const audioctx = new AudioContext();
 
 let play = false;
 let osc;
-let gain;
+let gain = 0.5;
+let attack = 0.5;
+let decay = 0.5;
 
 document.getElementById('gain').onchange = (e) => {
   console.log(e.target.valueAsNumber);
   gain.gain.value = e.target.valueAsNumber / 100;
 };
+
+function convertRangeValue(e) {
+  return e.target.valueAsNumber / 100;
+}
+
+document.getElementById('attack').onchange = (e) => {
+  attack = convertRangeValue(e);
+}
+
+document.getElementById('decay').onchange = (e) => {
+  decay = convertRangeValue(e);
+}
 
 function playOsc(waveformType = 'sine') {
   if (!play) {
